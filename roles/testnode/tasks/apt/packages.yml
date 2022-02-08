@@ -12,7 +12,9 @@
     name: "{{ packages_to_upgrade|list }}"
     state: latest
     force: yes
-  when: packages_to_upgrade|length > 0
+  when:
+  - packages_to_upgrade|length > 0
+  - not containerized_node
 
 - name: Upgrade non aarch64 packages
   apt:
